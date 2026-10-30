@@ -15,7 +15,7 @@ jobs:
 
        - name: Verificar la estructura del proyecto
          run: |
-           test -f docker/Dockerfile || (echo "Falta docker/Dockerfile" && exit 1)
+           test -f docker/Dockerfile.txt || (echo "Falta docker/Dockerfile" && exit 1)
            test -f docker/index.html || (echo "Falta docker/index.html" && exit 1)
            echo "Estructura correcta"
 
