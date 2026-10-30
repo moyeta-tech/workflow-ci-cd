@@ -29,7 +29,7 @@ jobs:
            echo "HTML validado"
 
        - name: Construir una imagen de docker
-         run: docker build -t practica:ci docker/
+         run: docker build -f docker/Dockerfile.txt -t practica:ci docker/
 
        - name: Probar que el contenedor responda
          run: |
