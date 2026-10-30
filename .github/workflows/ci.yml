@@ -35,6 +35,6 @@ jobs:
          run: |
           docker run -d -p 8080:80 --name prueba practica:ci
            sleep 3
-           curl -f http://localhost:8080 > dev/null
+           curl -f http://localhost:8080 > /dev/null
            echo "El contenedor responde correctamente"
            docker stop prueba
