@@ -10,31 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Descargar el codigo
-        uses: actions/checkout@v4
+       - name: Descargar el codigo
+         uses: actions/checkout@v4
 
-      - name: Verificar la estructura del proyecto
-        run: |
-         test -f docker/Dockerfile || (echo "Falta docker/Dockerfile" && exit 1)
-         test -f docker/index.html || (echo "Falta docker/index.html" && exit 1)
-         echo "Estructura correcta"
+       - name: Verificar la estructura del proyecto
+         run: |
+           test -f docker/Dockerfile || (echo "Falta docker/Dockerfile" && exit 1)
+           test -f docker/index.html || (echo "Falta docker/index.html" && exit 1)
+           echo "Estructura correcta"
 
-      - name: Verificar archivo html
-        run: |
-         if grep -q "TU NOMBRE ACÁ" docker/index.html; then 
-         echo "Todavia está en el texto de ejemplo: poné tu nombre"
-         exit 1
+       - name: Verificar archivo html
+         run: |
+           if grep -q "TU NOMBRE ACÁ" docker/index.html; then 
+           echo "Todavia está en el texto de ejemplo: poné tu nombre"
+           exit 1
 
-         fi 
-         echo "HTML validado"
+           fi 
+           echo "HTML validado"
 
-      - name: Construir una imagen de docker
-        run: docker build -t practica:ci docker/
+       - name: Construir una imagen de docker
+         run: docker build -t practica:ci docker/
 
-      - name: Probar que el contenedor responda
-        run: |
-         docker run -d -p 8080:80 --name prueba practica:ci
-         sleep 3
-       curl -f http://localhost:8080 > dev/null
-       echo "El contenedor responde correctamente"
-       docker stop prueba
+       - name: Probar que el contenedor responda
+         run: |
+          docker run -d -p 8080:80 --name prueba practica:ci
+           sleep 3
+           curl -f http://localhost:8080 > dev/null
+           echo "El contenedor responde correctamente"
+           docker stop prueba
