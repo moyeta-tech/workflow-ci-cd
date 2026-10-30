@@ -29,12 +29,12 @@ jobs:
            echo "HTML validado"
 
        - name: Construir una imagen de docker
-         run: docker build -t practica:ci docker/
+         run: docker build -f docker/Dockerfile.txt -t practica:ci docker/
 
        - name: Probar que el contenedor responda
          run: |
           docker run -d -p 8080:80 --name prueba practica:ci
            sleep 3
-           curl -f http://localhost:8080 > dev/null
+           curl -f http://localhost:8080 > /dev/null
            echo "El contenedor responde correctamente"
            docker stop prueba
